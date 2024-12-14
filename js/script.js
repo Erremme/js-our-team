@@ -66,15 +66,49 @@ const teamMembers = [
 
 //DOM ELEMENTS
 const teamContainerElm = document.querySelector(".team-container")
- 
+const formTeamElm = document.getElementById("form-team")
+const nameElm = document.getElementById("name")
+const roleElm = document.getElementById("role")
+const emailElm = document.getElementById("email")
+const imageElm = document.getElementById("image")
 
 
 
-
+//PAGE LOAD
 for(let i = 0; i < teamMembers.length; i++){
     const {name, role, image , email} = teamMembers[i]
     teamItems += createCardMember(teamMembers[i])
 }
 
-teamContainerElm.innerHTML= teamItems
+teamContainerElm.innerHTML  = teamItems
+
+
+
+//DOM EVENT
+formTeamElm.addEventListener("submit", function(event){
+  event.preventDefault();
+
+
+  const name = nameElm.value;
+  const role = roleElm.value;
+  const email = emailElm.value;
+  const image = imageElm.value;
+
+
+const newMember ={
+  name,
+  role,
+  email,
+  image
+};
+
+teamMembers.push(newMember);
+
+const newCard = createCardMember(newMember)
+
+teamContainerElm.innerHTML += newCard;
+
+
+});
+
 
